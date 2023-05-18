@@ -4,36 +4,29 @@
 </pre>
 ## Propósito
 
-Este software es una araña web o también conocido como web crawler, para acceder, navegar e indexar el contenido 
-alojado en la red Tor, y que a través de técnicas de web scraping y NLP identifica de manera automátizada los servicios
- ONION relacionados a delitos informáticos. Los sitios descubiertos y categorizados son almacenados en una base de datos
- , esto incluye el fuente de la pagina por lo que se exceptua contenidos multimedia.
-La informacion relacionada a delitos informaticos pretende ser de alta relevancia para los organismos o entes de control
- en ayuda a descubrir actividades, hábitos o comportamientos objetos de análisis y estudio criminalístico que den o 
- puedan dar como resultado la mitigación de estos actos delictivos.
+This software is a web spider or also known as a web crawler, to access, navigate and index the content hosted on the Tor network, and that through web scraping and NLP techniques automatically identifies ONION services related to computer crimes. The discovered and categorized sites are stored in a database, this includes the source of the page, so multimedia content is excepted. The information related to computer crimes is intended to be of high relevance for control agencies or entities in helping to discover activities, habits or behaviors that are the object of analysis and criminal study that result or may result in the mitigation of these criminal acts.
  
 ### Flujo de Trabajo
  
 #### Crawling
  
-    1) Almacenamiento de enlaces semilla a la cola de crawling.
-    2) Obtener siguiente sitio en cola de crawling.
-    3) Verificación de estado del sitio. En caso de que el dominio padre ya haya sido revisado y no estaba en línea se evita realizar el mismo proceso para enlaces con subdominios de aquel.
-    4) Descubrimiento de nuevos enlaces.
-    5) Extracción del código fuente del sitio.
-    6) Almacenar datos del sitio objeto de crawling y scraping.
-    7) Almacenar nuevos enlaces encontrados a la cola de crawling. No se almacenaran enlaces que ya existen en la cola.
-    8) Volver a ejecutar desde el paso 2.
+ 1) Storage of seed links to the crawler queue.
+     2) Get next site in crawling queue.
+     3) Site status check. In the event that the parent domain has already been reviewed and was not online, the same process is avoided for links to its subdomains.
+     4) Discovery of new links.
+     5) Extraction of the source code of the site.
+     6) Store data from the site that is the object of crawling and scraping.
+     7) Store new found links to the crawling queue. Links that already exist in the queue will not be stored.
+     8) Rerun from step 2.
 
-#### Categorización de contenido
+#### Content Categorization
 
-    1) Obtener siguiente enlace y contenido almacenado para análisis.
-    2) Pre-procesamiento y preparación de contenido.
-    3) Obtener posible tema del sitio, términos claves relacionados al contenido.
-    4) Categorización del sitio mediante comparación con diccionario de delitos.
-    5) Almacenar sitio analizado, sus resultados y relación ilegal de ser el caso.
-    6) Volver a ejecutar el paso 1.
-
+     1) Get following link and stored content for analysis.
+     2) Pre-processing and content preparation.
+     3) Obtain possible theme of the site, key terms related to the content.
+     4) Categorization of the site by comparison with a crime dictionary.
+     5) Store analyzed site, its results and illegal relationship if applicable.
+     6) Repeat step 1 again.
 ## Instrucciones
  
 ### Dependencias en S.O.
@@ -56,8 +49,7 @@ La informacion relacionada a delitos informaticos pretende ser de alta relevanci
 
 ### Configuración Inicial
 
-Es necesario tener instalado y configurado el puerto de control en Tor, esto se lo puede realizar a traves del scritp 
-tor_install_config.sh 
+It is necessary to have the control port installed and configured in Tor, this can be done through scripttor_install_config.sh 
 
 `chmod -x tor_install_config.sh`
 
@@ -83,8 +75,8 @@ Instalar dependencias de python, ejecutar:
 
 #### Crawler
 
-Para ejecutar el crawler es necesario haber ingresado en el archivo `OnionLinkSeed.txt` los enlaces semilla y en 
-`config.properties` los parametros de acceso a la base de datos. Posterior sera necesario ejecutar el siguiente comando:
+To run the crawler it is necessary to have entered the seed links in the `OnionLinkSeed.txt` file and in
+`config.properties` the access parameters to the database. Later it will be necessary to execute the following command:
 
 `python main.py -s OnionLinksSeed.txt -c config.properties`
 
@@ -98,8 +90,8 @@ required arguments:
 
 #### Categorización de sitios
 
-Para ejecutar la categorización de sitios descubiertos es necesario haber ingresado en el archivo `crime_keywords.json` 
-los terminos claves de cada crimen a identificar. Posterior sera necesario ejecutar el siguiente comando:
+To run the categorization of discovered sites it is necessary to have entered the `crime_keywords.json` file
+the key terms of each crime to identify. Later it will be necessary to execute the following command:
 
 `python main_nlp.py -c config.properties -k crime_keywords.json`
 
